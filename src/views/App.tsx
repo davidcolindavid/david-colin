@@ -1,25 +1,40 @@
-import React, {ReactElement} from 'react';
-import './App.scss';
+import React, {FunctionComponent, ReactElement} from 'react';
+import {createBrowserHistory} from 'history';
+import {Router, Route, Switch} from 'react-router-dom';
 
-const App = (): ReactElement => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={'logo.svg'} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-};
+import Home from './components/layout/Home';
+import Projects from './components/layout/projects/Projects';
+import About from './components/layout/about/About';
+import NoMatch from './components/layout/nomatch/NoMatch';
+import Container from './components/layout/container/Container';
+
+import './style/App.scss';
+
+const App: FunctionComponent = (): ReactElement => (
+  <Router history={createBrowserHistory()}>
+    <Container>
+      <Switch>
+          <Route
+            exact
+            path="/"
+            component={Home}
+          />
+          <Route
+            exact
+            path="/projects"
+            component={Projects}
+          />
+          <Route
+            exact
+            path="/about"
+            component={About}
+          />
+          <Route
+            component={NoMatch}
+          />
+      </Switch>
+    </Container>
+  </Router>
+);
 
 export default App;
